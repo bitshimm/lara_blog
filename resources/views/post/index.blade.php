@@ -1,20 +1,23 @@
 @extends('layouts.main')
 @section('content')
-<div class="mb-3">
+<div class="mb-5">
     <a class="btn btn-primary" href="{{ route('posts.create') }}" role="button">Добавить</a>
 </div>
-<div class="row">
 @foreach($posts as $post)
-    <div class="col-4 mb-3">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">{{ $post->title }}</h5>
-                <p class="card-text">{{ $post->content }}</p>
-                <p class="card-text">{{ $post->image }}</p>
-                <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary">Посмотреть</a>
-            </div>
-        </div>
-    </div>
-@endforeach
+<div class="btn-group mb-3 w-100" role="group">
+    <a href="{{ route('posts.show', $post->id) }}" class="btn btn-outline-secondary w-75 text-start">
+        {{ $post->id }}. {{ $post->title }}<br>
+    </a>
+    <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary">
+        Редактировать
+    </a>
+    <form action="{{ route('posts.destroy', $post->id) }}" method="post" class="btn btn-danger">
+        @csrf
+        @method('delete')
+        <button style="background: no-repeat;border: none;color: #fff;">
+            Удалить
+        </button>
+    </form>
 </div>
+@endforeach
 @endsection

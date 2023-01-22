@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\PostController;
-use App\Models\Post;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,12 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::group([],  function () {
+    Route::get('/posts', Post\IndexController::class)->name('posts.index');
+    Route::get('/posts/create', Post\CreateController::class)->name('posts.create');
+    Route::post('/posts', Post\StoreController::class)->name('posts.store');
+    Route::get('/posts/{post}', Post\ShowController::class)->name('posts.show');
+    Route::get('/posts/{post}/edit', Post\EditController::class)->name('posts.edit');
+    Route::patch('/posts/{post}', Post\UpdateController::class)->name('posts.update');
+    Route::delete('/posts/{post}', Post\DestroyController::class)->name('posts.destroy');
+});
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
-
-Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
-Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
-Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
-Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
-Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
-Route::patch('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
-// Route::get('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
