@@ -20,4 +20,7 @@
     </form>
 </div>
 @endforeach
+
+{{ $posts->links() }}
+
 @endsection

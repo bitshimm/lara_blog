@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $categories = Category::factory(100)->create();
-        $tags = Tag::factory(100)->create();
+        $tags = Tag::factory(200)->create();
         $posts = Post::factory(1000)->create();
 
         foreach ($posts as $post) {
