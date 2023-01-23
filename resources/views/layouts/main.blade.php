@@ -32,7 +32,7 @@
         </nav>
     </div>
     <div class="container mt-3">
-        @include('components.errors')
+        @include('main.components.errors')
         @yield('content')
     </div>
 </body>

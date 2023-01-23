@@ -11,8 +11,8 @@ class IndexController extends BaseController
 {
     public function __invoke(FilterRequest $filterRequest)
     {
-        $postsQuery = Post::paginate(10);
+        $posts = Post::paginate(10);
 
-        return view('post.index', compact('posts'));
+        return view('main.post.index', compact('posts'));
     }
 }
