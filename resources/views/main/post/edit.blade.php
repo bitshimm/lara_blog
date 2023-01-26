@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
-<form action="{{ route('posts.update', $post->id) }}" method="post">
+<form action="{{ route('main.post.update', $post->id) }}" method="post">
     @csrf
     @method('patch')
     <div class="mb-3">

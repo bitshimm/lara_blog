@@ -13,10 +13,10 @@
         </div>
         <div class="row justify-content-between">
             <div class="col-auto">
-                <a class="btn btn-primary" href="{{ route('posts.edit', $post->id) }}" role="button">Изменить</a>
+                <a class="btn btn-primary" href="{{ route('main.post.edit', $post->id) }}" role="button">Изменить</a>
             </div>
             <div class="col-auto">
-                <form action="{{ route('posts.destroy', $post->id) }}" method="post">
+                <form action="{{ route('main.post.destroy', $post->id) }}" method="post">
                     @csrf
                     @method('delete')
                     <button class="btn btn-danger">Удалить</button>

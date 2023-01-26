@@ -16,12 +16,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $categories = Category::factory(100)->create();
-        $tags = Tag::factory(200)->create();
-        $posts = Post::factory(1000)->create();
+        $categories = Category::factory(10)->create();
+        $tags = Tag::factory(20)->create();
+        $posts = Post::factory(100)->create();
 
         foreach ($posts as $post) {
-            $tagsIds = $tags->random(5)->pluck('id');
+            $tagsIds = $tags->random(2)->pluck('id');
             $post->tags()->attach($tagsIds);
         }
     }

@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
-<form action="{{ route('posts.store') }}" method="post">
+<form action="{{ route('main.post.store') }}" method="post">
     @csrf
     <div class="mb-3">
         <label for="title" class="form-label">Заголовок</label>

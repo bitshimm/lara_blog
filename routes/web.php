@@ -1,9 +1,11 @@
 <?php
 
-use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Main\MainController;
+use App\Http\Controllers\Admin\AdminController;
 
-use App\Http\Controllers\Post;
+
+use App\Http\Controllers\Main\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,12 +19,23 @@ use App\Http\Controllers\Post;
 */
 
 Route::group([],  function () {
-    Route::get('/posts', Post\IndexController::class)->name('posts.index');
-    Route::get('/posts/create', Post\CreateController::class)->name('posts.create');
-    Route::post('/posts', Post\StoreController::class)->name('posts.store');
-    Route::get('/posts/{post}', Post\ShowController::class)->name('posts.show');
-    Route::get('/posts/{post}/edit', Post\EditController::class)->name('posts.edit');
-    Route::patch('/posts/{post}', Post\UpdateController::class)->name('posts.update');
-    Route::delete('/posts/{post}', Post\DestroyController::class)->name('posts.destroy');
+    Route::get('/posts', [PostController::class, 'index'])->name('main.post.index');
+    Route::get('/posts/create', [PostController::class, 'create'])->name('main.post.create');
+    Route::post('/posts', [PostController::class, 'store'])->name('main.post.store');
+    Route::get('/posts/{post}', [PostController::class, 'show'])->name('main.post.show');
+    Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('main.post.edit');
+    Route::patch('/posts/{post}', [PostController::class, 'update'])->name('main.post.update');
+    Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('main.post.destroy');
 });
-Route::get('/', [HomeController::class, 'index'])->name('home.index');
+
+Route::group(['prefix' => 'admin'],  function () {
+    Route::get('/posts', [PostController::class, 'index'])->name('main.post.index');
+    Route::get('/posts/create', [PostController::class, 'create'])->name('main.post.create');
+    Route::post('/posts', [PostController::class, 'store'])->name('main.post.store');
+    Route::get('/posts/{post}', [PostController::class, 'show'])->name('main.post.show');
+    Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('main.post.edit');
+    Route::patch('/posts/{post}', [PostController::class, 'update'])->name('main.post.update');
+    Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('main.post.destroy');
+});
+Route::get('/', [MainController::class, 'index'])->name('main.index');
+Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
