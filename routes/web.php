@@ -1,11 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Main\MainController;
-use App\Http\Controllers\Admin\AdminController;
-
-
-use App\Http\Controllers\Main\PostController;
+use App\Http\Controllers\Main;
+use App\Http\Controllers\Admin;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,24 +15,32 @@ use App\Http\Controllers\Main\PostController;
 |
 */
 
-Route::group([],  function () {
-    Route::get('/posts', [PostController::class, 'index'])->name('main.post.index');
-    Route::get('/posts/create', [PostController::class, 'create'])->name('main.post.create');
-    Route::post('/posts', [PostController::class, 'store'])->name('main.post.store');
-    Route::get('/posts/{post}', [PostController::class, 'show'])->name('main.post.show');
-    Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('main.post.edit');
-    Route::patch('/posts/{post}', [PostController::class, 'update'])->name('main.post.update');
-    Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('main.post.destroy');
+Route::group(['prefix' => '/'],  function () {
+
+    Route::get('/', [Main\MainController::class, 'index'])->name('main.index');
+
+    Route::group(['prefix' => 'post'],  function () {
+        Route::get('/', [Main\PostController::class, 'index'])->name('main.post.index');
+        Route::get('/create', [Main\PostController::class, 'create'])->name('main.post.create');
+        Route::post('/', [Main\PostController::class, 'store'])->name('main.post.store');
+        Route::get('/{post}', [Main\PostController::class, 'show'])->name('main.post.show');
+        Route::get('/{post}/edit', [Main\PostController::class, 'edit'])->name('main.post.edit');
+        Route::patch('/{post}', [Main\PostController::class, 'update'])->name('main.post.update');
+        Route::delete('/{post}', [Main\PostController::class, 'destroy'])->name('main.post.destroy');
+    });
 });
 
 Route::group(['prefix' => 'admin'],  function () {
-    Route::get('/posts', [PostController::class, 'index'])->name('main.post.index');
-    Route::get('/posts/create', [PostController::class, 'create'])->name('main.post.create');
-    Route::post('/posts', [PostController::class, 'store'])->name('main.post.store');
-    Route::get('/posts/{post}', [PostController::class, 'show'])->name('main.post.show');
-    Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('main.post.edit');
-    Route::patch('/posts/{post}', [PostController::class, 'update'])->name('main.post.update');
-    Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('main.post.destroy');
+
+    Route::get('/', [Admin\AdminController::class, 'index'])->name('admin.index');
+
+    Route::group(['prefix' => 'post'],  function () {
+        Route::get('/', [Admin\PostController::class, 'index'])->name('admin.post.index');
+        Route::get('/create', [Admin\PostController::class, 'create'])->name('admin.post.create');
+        Route::post('/', [Admin\PostController::class, 'store'])->name('admin.post.store');
+        Route::get('/{post}', [Admin\PostController::class, 'show'])->name('admin.post.show');
+        Route::get('/{post}/edit', [Admin\PostController::class, 'edit'])->name('admin.post.edit');
+        Route::patch('/{post}', [Admin\PostController::class, 'update'])->name('admin.post.update');
+        Route::delete('/{post}', [Admin\PostController::class, 'destroy'])->name('admin.post.destroy');
+    });
 });
-Route::get('/', [MainController::class, 'index'])->name('main.index');
-Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
