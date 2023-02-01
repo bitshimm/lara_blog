@@ -30,7 +30,7 @@ Route::group(['prefix' => '/'],  function () {
     });
 });
 
-Route::group(['prefix' => 'admin'],  function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'admin'],  function () {
 
     Route::get('/', [Admin\AdminController::class, 'index'])->name('admin.index');
 
@@ -44,3 +44,9 @@ Route::group(['prefix' => 'admin'],  function () {
         Route::delete('/{post}', [Admin\PostController::class, 'destroy'])->name('admin.post.destroy');
     });
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';

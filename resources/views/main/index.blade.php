@@ -1,4 +1,4 @@
 @extends('layouts.main')
 @section('content')
-    <h1>Main index page</h1>
+    <h1>Home Page</h1>
 @endsection
